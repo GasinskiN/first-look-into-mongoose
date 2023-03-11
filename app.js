@@ -1,25 +1,32 @@
 const mongoose = require('mongoose');
     
+const fruitSchema = new mongoose.Schema ({
+    name: {
+        type: String,
+        required: [true, "Why no name"]
+    },
+    rating: Number,
+    review: String
+});
+
+const Fruit = mongoose.model("Fruit", fruitSchema);
+
 //connect to MongoDB by specifying port to access MongoDB server
 main().catch(err => console.log(err));
     
 async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/fruitsDB');
-    const fruitSchema = new mongoose.Schema ({
-        name: String,
-        rating: Number,
-        review: String
-    });
     
-    const Fruit = mongoose.model("Fruit", fruitSchema);
     
-    const apple = new Fruit ({
-        name: "Apple",
-        rating: 7,
-        review: "A pretty good fuit."
-    });
     
-    // apple.save();
+    try{
+        const apple = await Fruit.create({
+            rating: 5,
+            review: "its ok"
+        });
+    } catch (err) {
+        console.log(err);
+    }
     
     
     const personSchema = new mongoose.Schema({
@@ -61,7 +68,7 @@ async function main() {
     
     try{
         const myfruit = await Fruit.find();
-        myfruit.forEach(el => console.log(el.name));
+        console.log(myfruit);
     } catch(err){
         console.log(err);
     }
