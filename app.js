@@ -1,4 +1,3 @@
-//require the Mongoose package (after running >npm i mongoose in Hyper to install it)
 const mongoose = require('mongoose');
     
 //connect to MongoDB by specifying port to access MongoDB server
@@ -22,7 +21,7 @@ const apple = new Fruit ({
     review: "A pretty good fuit."
 });
 
-apple.save();
+// apple.save();
 
 
 const personSchema = new mongoose.Schema({
@@ -35,6 +34,29 @@ const Person = mongoose.model("Person", personSchema);
 const joe = new Person({
     name: "Joe",
     age: 62
-})
+});
 
-joe.save();
+// joe.save();
+
+
+const pear = new Fruit({
+    name: "Pear",
+    rating: 8,
+    review: "A scrumptious and sweet fruit"
+});
+
+const pineapple = new Fruit({
+    name: "Pineapple",
+    rating: 7,
+    review: "A good tasting fruit but the preparing process is a pain"
+});
+
+const strawberry = new Fruit({
+    name: "Strawberry",
+    rating: 8,
+    review: "If you can find ripe ones they are great"
+});
+
+Fruit.insertMany([pear, pineapple, strawberry])
+    .then(() => console.log("Inputting the items was succesful"))
+    .catch((err) => console.log(err))
