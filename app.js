@@ -57,6 +57,14 @@ const strawberry = new Fruit({
     review: "If you can find ripe ones they are great"
 });
 
-Fruit.insertMany([pear, pineapple, strawberry])
-    .then(() => console.log("Inputting the items was succesful"))
-    .catch((err) => console.log(err))
+
+run();
+
+async function run(){
+    try{
+        const myfruit = await Fruit.find();
+        console.log(myfruit);
+    } catch(err){
+        console.log(err);
+    }
+}
