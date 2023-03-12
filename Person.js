@@ -19,4 +19,14 @@ const personSchema = new mongoose.Schema({
     }
 });
 
+// Get name of instance and greet the user with his name
+personSchema.methods.sayHello = function() {
+    console.log("Hello it's nice to meet you my name is " + this.name);
+};
+
+// Find all instances of a person with provided age
+personSchema.statics.findByAge = function(age){
+    return this.where({ age: age});
+};
+
 module.exports = mongoose.model("Person", personSchema);
