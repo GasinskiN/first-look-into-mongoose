@@ -12,6 +12,10 @@ const personSchema = new mongoose.Schema({
         type: Date,
         immutable: true,
         default: () => Date.now(),
+    },
+    favoriteFruit: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "Fruit"
     }
 });
 
