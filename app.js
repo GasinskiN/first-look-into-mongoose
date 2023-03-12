@@ -42,13 +42,16 @@ async function main() {
     // }
     
     // Insert joe into the people collection
-    const jeff = new Person({
-        name: "daBaby",
-        age: 3
-    });
-
+    // const jeff = new Person({
+    //     name: "George",
+    //     age: 33
+    // });
+    // await jeff.save();
+    
     try { 
-        await jeff.save();
+        const person = await Person.where("age").gt(32).populate("favoriteFruit").limit(1);
+        console.log(person);
+        await person[0].save();
     } catch (err) {
         console.log(err.message);
     }
