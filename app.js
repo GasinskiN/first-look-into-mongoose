@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// require fruit and person Schemas and models
 const Fruit = require("./Fruit"); 
 const Person = require("./Person");  
 
@@ -29,6 +30,7 @@ const strawberry = new Fruit({
 async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/fruitsDB');
     
+    // insert an apple into the fruit collection
     // try{
     //     const apple = await Fruit.create({
     //         name: "Joel",
@@ -39,17 +41,20 @@ async function main() {
     //     console.log(err.message);
     // }
     
-    
-    // const joe = new Person({
-    //     name: "Joe",
-    //     age: 62
-    // });
-    
-    // await joe.save();
-    
+    // Insert joe into the people collection
+    const jeff = new Person({
+        name: "daBaby",
+        age: 3
+    });
+
+    try { 
+        await jeff.save();
+    } catch (err) {
+        console.log(err.message);
+    }
     
 
-    
+    // Inset a pear, pineapple and strawberry item into the Fruit collection
     // Fruit.insertMany([pear, pineapple, strawberry])
     //     .then(() => console.log("Inputting the items was succesful"))
     //     .catch((err) => console.log(err))
@@ -62,17 +67,21 @@ async function main() {
     //     console.log(err.message);
     // }
 
-
+    // log to console all the items in the fruit collection
     try{
-        const myfruit = await Fruit.find();
-        console.log(myfruit);
+        const myPerson = await Person.find();
+        console.log(myPerson);
     } catch(err){
         console.log(err.message);
     }
 
+
+    // Update any fruit items that have the rating of five with the name orange
     // const res = await Fruit.updateMany({ rating: 5 }, { name: "Orange"});
     // console.log([res.acknowledged, res.modifiedCount]);
 
+
+    // delete any fruit items that have the name Apple
     // const response = await Fruit.deleteMany({ name: "Apple"});
     // console.log(response.deletedCount);
 
