@@ -47,11 +47,12 @@ async function main() {
     //     age: 33
     // });
     // await jeff.save();
-    
+
+    // basically a join without really joining
     try { 
         const person = await Person.where("age").gt(32).populate("favoriteFruit").limit(1);
-        console.log(person);
-        await person[0].save();
+        person[0].sayHello();
+        // console.log(person);
     } catch (err) {
         console.log(err.message);
     }
@@ -72,7 +73,7 @@ async function main() {
 
     // log to console all the items in the fruit collection
     try{
-        const myPerson = await Person.find();
+        const myPerson = await Person.findByAge(33);
         console.log(myPerson);
     } catch(err){
         console.log(err.message);
